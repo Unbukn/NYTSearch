@@ -1,4 +1,4 @@
-$(".button").on("click", function() {
+$("#searchbtn").on("click", function() {
     event.preventDefault()
     var search = $('#search').val()
     var numberOf = $("#numberOf").val()
@@ -14,13 +14,17 @@ $(".button").on("click", function() {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-        console.log(response.response)
+        console.log(response)
         
     // first clear out the results container
     $("#results").empty();
     for (i = 0; i < numberOf; i++) {
         // get current article title
-        var articleTitle = response.response.docs[i].abstract
+        var articleTitle = response.response.docs[i].headline.main
+        console.log(articleTitle)
+        // var leadPara = response.response.docs[i].
+        // get web url
+        // var webUrl = response.response.docs[i].web_url
         console.log(articleTitle)
         // create a new div
         var newDiv = $("<div>")
@@ -49,6 +53,14 @@ $(".button").on("click", function() {
 
 });
 
+$("#clear").on("click", function() {
+    event.preventDefault()
+    $('#search').val('')
+    $('#numberOf').val('')
+    $('#startYear').val('')
+    $('#endYear').val('')
+
+});
 // Alex, here are the ids
 
 // numberOf
